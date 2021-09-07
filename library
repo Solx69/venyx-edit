@@ -2379,6 +2379,7 @@ do
 	function section:updateChecklist(module, aOptions)
 		local dropdown = module.Instance
 		local options = module.Options
+		local defaults = options.defaults or {}
 		aOptions = aOptions or {}
 
 		if (options.title) then
@@ -2404,31 +2405,60 @@ do
 		for i, value in pairs(list) do
 			local button
 			if not dropdown.List.Frame:FindFirstChild(value) then
-				button = utility:Create("ImageButton", {
-					Name = value,
-					Parent = dropdown.List.Frame,
-					BackgroundTransparency = 1,
-					BorderSizePixel = 0,
-					Size = UDim2.new(1, 0, 0, 30),
-					ZIndex = 2,
-					Image = "rbxassetid://5028857472",
-					ImageColor3 = themes.DarkContrast,
-					ScaleType = Enum.ScaleType.Slice,
-					SliceCenter = Rect.new(2, 2, 298, 298)
-				}, {
-					utility:Create("TextLabel", {
+				if table.find(defaults,value) then
+					button = utility:Create("ImageButton", {
+						Name = value,
+						Parent = dropdown.List.Frame,
 						BackgroundTransparency = 1,
-						Position = UDim2.new(0, 10, 0, 0),
-						Size = UDim2.new(1, -10, 1, 0),
-						ZIndex = 3,
-						Font = Enum.Font.Gotham,
-						Text = value,
-						TextColor3 = themes.TextColor,
-						TextSize = 12,
-						TextXAlignment = "Left",
-						TextTransparency = 0.10000000149012
+						BorderSizePixel = 0,
+						Size = UDim2.new(1, 0, 0, 30),
+						ZIndex = 2,
+						Image = "rbxassetid://5028857472",
+						ImageColor3 = themes.DarkContrast,
+						ScaleType = Enum.ScaleType.Slice,
+						SliceCenter = Rect.new(2, 2, 298, 298)
+					}, {
+						utility:Create("TextLabel", {
+							BackgroundTransparency = 1,
+							Position = UDim2.new(0, 10, 0, 0),
+							Size = UDim2.new(1, -10, 1, 0),
+							ZIndex = 3,
+							Font = Enum.Font.Gotham,
+							Text = value,
+							TextColor3 = Color3.fromRGB(0,255,0),
+							TextSize = 12,
+							TextXAlignment = "Left",
+							TextTransparency = 0.10000000149012
+						})
 					})
-				})
+					options.callback(value,true)
+				else
+					button = utility:Create("ImageButton", {
+						Name = value,
+						Parent = dropdown.List.Frame,
+						BackgroundTransparency = 1,
+						BorderSizePixel = 0,
+						Size = UDim2.new(1, 0, 0, 30),
+						ZIndex = 2,
+						Image = "rbxassetid://5028857472",
+						ImageColor3 = themes.DarkContrast,
+						ScaleType = Enum.ScaleType.Slice,
+						SliceCenter = Rect.new(2, 2, 298, 298)
+					}, {
+						utility:Create("TextLabel", {
+							BackgroundTransparency = 1,
+							Position = UDim2.new(0, 10, 0, 0),
+							Size = UDim2.new(1, -10, 1, 0),
+							ZIndex = 3,
+							Font = Enum.Font.Gotham,
+							Text = value,
+							TextColor3 = themes.TextColor,
+							TextSize = 12,
+							TextXAlignment = "Left",
+							TextTransparency = 0.10000000149012
+						})
+					})
+				end
 			else
 				button = dropdown.List.Frame[value]
 			end
