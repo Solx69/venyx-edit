@@ -1,4 +1,4 @@
-print("I LOVE U")
+print("EAT MY COOCK")
 
 -- init
 local player = game.Players.LocalPlayer
@@ -2476,7 +2476,7 @@ do
 			end
 
 			button.MouseButton1Click:Connect(function()
-				if button.TextLabel.TextColor3 == themes.TextColor then
+				if button.Bool.Value == false then
 					button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
 					button.Bool.Value = true
 				else
