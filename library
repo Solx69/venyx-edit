@@ -1,4 +1,3 @@
-print("yes")
 -- init
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
@@ -2392,7 +2391,11 @@ do
 
 		for i, button in pairs(dropdown.List.Frame:GetChildren()) do
 			if button:IsA("ImageButton") then
-				button.Visible = false
+				if button.Visible == true then
+					button.Visible = false
+				else
+					button.Visible = true
+				end
 			end
 		end
 
