@@ -1,3 +1,5 @@
+print("HEY!")
+
 -- init
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
@@ -2391,19 +2393,21 @@ do
 
 		for i, button in pairs(dropdown.List.Frame:GetChildren()) do
 			if button:IsA("ImageButton") then
-				if button.Visible == true then
-					button.Visible = false
-				else
+				if button.Visible == false then
 					button.Visible = true
+				else
+					button.Visible = false
 				end
 			end
 		end
 
 		local list = aOptions.update or options.list
-		local button
-		if not dropdown.List.Frame:FindFirstChildOfClass("ImageButton") then
-			for i, value in pairs(list) do
-				 	button = utility:Create("ImageButton", {
+		
+		for i, value in pairs(list) do
+			local button
+			if not dropdown.List.Frame:FindFirstChild(value) then
+				button = utility:Create("ImageButton", {
+					Name = value,
 					Parent = dropdown.List.Frame,
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
@@ -2427,22 +2431,22 @@ do
 						TextTransparency = 0.10000000149012
 					})
 				})
+			else
+				button = dropdown.List.Frame[value]
 			end
-		elseif dropdown.List.Frame:FindFirstChildOfClass("ImageButton") then
-			for i, value in pairs(dropdown.List.Frame:GetChildren()) do
-				if value:IsA("ImageButton") then
-					button = value
-				end
-			end
-		end
-		
-		button.MouseButton1Click:Connect(function()
-			options.callback(value)
-			button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
-			self:updateDropdown(module, {update = value and {} or false})
-		end)
 
-		entries = entries + 1
+			button.MouseButton1Click:Connect(function()
+				options.callback(value)
+				if button.TextLabel.TextColor3 == themes.TextColor then
+					button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
+				else
+					button.TextLabel.TextColor3 = themes.TextColor
+				end
+				self:updateDropdown(module, {update = value and {} or false})
+			end)
+
+			entries = entries + 1
+		end
 
 		local frame = dropdown.List.Frame
 
