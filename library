@@ -1,4 +1,4 @@
-print("EAT MY COOCK")
+print("OK BET")
 
 -- init
 local player = game.Players.LocalPlayer
@@ -2438,6 +2438,16 @@ do
 						})
 					})
 					options.callback(value,true)
+					button.MouseButton1Click:Connect(function()
+						if button.Bool.Value == false then
+							button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
+							button.Bool.Value = true
+						else
+							button.TextLabel.TextColor3 = themes.TextColor
+							button.Bool.Value = false
+						end
+						options.callback(value, button.Bool.Value)
+					end)
 				else
 					button = utility:Create("ImageButton", {
 						Name = value,
@@ -2468,23 +2478,19 @@ do
 							Name = "Bool",
 							Value = false
 						})
-					}
-				)
+					})
+					button.MouseButton1Click:Connect(function()
+						if button.Bool.Value == false then
+							button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
+							button.Bool.Value = true
+						else
+							button.TextLabel.TextColor3 = themes.TextColor
+							button.Bool.Value = false
+						end
+						options.callback(value, button.Bool.Value)
+					end)
 				end
-			else
-				button = dropdown.List.Frame[value]
 			end
-
-			button.MouseButton1Click:Connect(function()
-				if button.Bool.Value == false then
-					button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
-					button.Bool.Value = true
-				else
-					button.TextLabel.TextColor3 = themes.TextColor
-					button.Bool.Value = false
-				end
-				options.callback(value, button.Bool.Value)
-			end)
 
 			entries = entries + 1
 		end
