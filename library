@@ -1,4 +1,4 @@
-print("OK")
+print("I LOVE U")
 
 -- init
 local player = game.Players.LocalPlayer
@@ -2431,9 +2431,8 @@ do
 							TextSize = 12,
 							TextXAlignment = "Left",
 							TextTransparency = 0.10000000149012
-						})
-					}, {
-						utility:Create("BoolValue",{
+						}),
+						utility:Create("BoolValue", {
 							Name = "Bool",
 							Value = true
 						})
@@ -2451,7 +2450,8 @@ do
 						ImageColor3 = themes.DarkContrast,
 						ScaleType = Enum.ScaleType.Slice,
 						SliceCenter = Rect.new(2, 2, 298, 298)
-					}, {
+					}, 
+					{
 						utility:Create("TextLabel", {
 							BackgroundTransparency = 1,
 							Position = UDim2.new(0, 10, 0, 0),
@@ -2463,13 +2463,13 @@ do
 							TextSize = 12,
 							TextXAlignment = "Left",
 							TextTransparency = 0.10000000149012
-						})
-					}, {
-						utility:Create("BoolValue",{
+						}),
+						utility:Create("BoolValue", {
 							Name = "Bool",
 							Value = false
 						})
-					})
+					}
+				)
 				end
 			else
 				button = dropdown.List.Frame[value]
