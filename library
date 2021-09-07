@@ -1,5 +1,3 @@
-print("HEY!")
-
 -- init
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
@@ -2442,7 +2440,6 @@ do
 				else
 					button.TextLabel.TextColor3 = themes.TextColor
 				end
-				self:updateDropdown(module, {update = value and {} or false})
 			end)
 
 			entries = entries + 1
