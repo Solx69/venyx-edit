@@ -1851,6 +1851,7 @@ do
 		-- self:Resize()
 
 		local search = checklist.Search
+		local list = checklist.List
 		local focused
 
 		-- // Tostring the list
@@ -2390,7 +2391,7 @@ do
 
 		for i, button in pairs(dropdown.List.Frame:GetChildren()) do
 			if button:IsA("ImageButton") then
-				button:Destroy()
+				button.Visible = false
 			end
 		end
 
