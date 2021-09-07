@@ -1,3 +1,5 @@
+print("YO!")
+
 -- init
 local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
@@ -2434,12 +2436,15 @@ do
 			end
 
 			button.MouseButton1Click:Connect(function()
-				options.callback(value)
+				local bool
 				if button.TextLabel.TextColor3 == themes.TextColor then
 					button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
+					bool = true
 				else
 					button.TextLabel.TextColor3 = themes.TextColor
+					bool = false
 				end
+				options.callback(value, bool)
 			end)
 
 			entries = entries + 1
