@@ -2424,7 +2424,7 @@ do
 					})
 				})
 			end
-		else
+		elseif dropdown.List.Frame:FindFirstChildOfClass("ImageButton") then
 			for i, value in pairs(dropdown.List.Frame:GetChildren()) do
 				if value:IsA("ImageButton") then
 					button = value
