@@ -2425,8 +2425,7 @@ do
 
 			button.MouseButton1Click:Connect(function()
 				options.callback(value)
-
-				options.title = value
+				button.ImageColor3 = Color3.fromRGB(0,255,0)
 				self:updateDropdown(module, {update = value and {} or false})
 			end)
 
