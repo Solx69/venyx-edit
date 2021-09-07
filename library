@@ -2432,14 +2432,13 @@ do
 			end
 		end
 		
-			button.MouseButton1Click:Connect(function()
-				options.callback(value)
-				button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
-				self:updateDropdown(module, {update = value and {} or false})
-			end)
+		button.MouseButton1Click:Connect(function()
+			options.callback(value)
+			button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
+			self:updateDropdown(module, {update = value and {} or false})
+		end)
 
-			entries = entries + 1
-		end
+		entries = entries + 1
 
 		local frame = dropdown.List.Frame
 
