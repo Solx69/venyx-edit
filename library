@@ -2375,6 +2375,86 @@ do
 		return options.value
 	end
 
+	function section:updateChecklist(module, aOptions)
+		local dropdown = module.Instance
+		local options = module.Options
+		aOptions = aOptions or {}
+
+		if (options.title) then
+			dropdown.Search.TextBox.Text = options.title
+		end
+
+		local entries = 0
+
+		utility:Pop(dropdown.Search, 10)
+
+		for i, button in pairs(dropdown.List.Frame:GetChildren()) do
+			if button:IsA("ImageButton") then
+				button:Destroy()
+			end
+		end
+
+		local list = aOptions.update or options.list
+
+		for i, value in pairs(list) do
+			local button = utility:Create("ImageButton", {
+				Parent = dropdown.List.Frame,
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				Size = UDim2.new(1, 0, 0, 30),
+				ZIndex = 2,
+				Image = "rbxassetid://5028857472",
+				ImageColor3 = themes.DarkContrast,
+				ScaleType = Enum.ScaleType.Slice,
+				SliceCenter = Rect.new(2, 2, 298, 298)
+			}, {
+				utility:Create("TextLabel", {
+					BackgroundTransparency = 1,
+					Position = UDim2.new(0, 10, 0, 0),
+					Size = UDim2.new(1, -10, 1, 0),
+					ZIndex = 3,
+					Font = Enum.Font.Gotham,
+					Text = value,
+					TextColor3 = themes.TextColor,
+					TextSize = 12,
+					TextXAlignment = "Left",
+					TextTransparency = 0.10000000149012
+				})
+			})
+
+			button.MouseButton1Click:Connect(function()
+				options.callback(value)
+
+				options.title = value
+				self:updateDropdown(module, {update = value and {} or false})
+			end)
+
+			entries = entries + 1
+		end
+
+		local frame = dropdown.List.Frame
+
+		if (not aOptions.noOpen) then
+			utility:Tween(dropdown, {Size = UDim2.new(1, 0, 0, (entries == 0 and 30) or math.clamp(entries, 0, 3) * 34 + 38)}, 0.3)
+			utility:Tween(dropdown.Search.Button, {Rotation = not aOptions.update and 180 or 0}, 0.3)
+		end
+
+		if entries > 3 then
+
+			for i, button in pairs(dropdown.List.Frame:GetChildren()) do
+				if button:IsA("ImageButton") then
+					button.Size = UDim2.new(1, -6, 0, 30)
+				end
+			end
+
+			frame.CanvasSize = UDim2.new(0, 0, 0, (entries * 34) - 4)
+			frame.ScrollBarImageTransparency = 0
+		else
+			frame.CanvasSize = UDim2.new(0, 0, 0, 0)
+			frame.ScrollBarImageTransparency = 1
+		end
+	end
+
 	function section:updateDropdown(module, aOptions)
 		local dropdown = module.Instance
 		local options = module.Options
