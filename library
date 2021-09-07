@@ -2396,36 +2396,45 @@ do
 		end
 
 		local list = aOptions.update or options.list
-
-		for i, value in pairs(list) do
-			local button = utility:Create("ImageButton", {
-				Parent = dropdown.List.Frame,
-				BackgroundTransparency = 1,
-				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, 30),
-				ZIndex = 2,
-				Image = "rbxassetid://5028857472",
-				ImageColor3 = themes.DarkContrast,
-				ScaleType = Enum.ScaleType.Slice,
-				SliceCenter = Rect.new(2, 2, 298, 298)
-			}, {
-				utility:Create("TextLabel", {
+		local button
+		if not dropdown.List.Frame:FindFirstChildOfClass("ImageButton") then
+			for i, value in pairs(list) do
+				 	button = utility:Create("ImageButton", {
+					Parent = dropdown.List.Frame,
 					BackgroundTransparency = 1,
-					Position = UDim2.new(0, 10, 0, 0),
-					Size = UDim2.new(1, -10, 1, 0),
-					ZIndex = 3,
-					Font = Enum.Font.Gotham,
-					Text = value,
-					TextColor3 = themes.TextColor,
-					TextSize = 12,
-					TextXAlignment = "Left",
-					TextTransparency = 0.10000000149012
+					BorderSizePixel = 0,
+					Size = UDim2.new(1, 0, 0, 30),
+					ZIndex = 2,
+					Image = "rbxassetid://5028857472",
+					ImageColor3 = themes.DarkContrast,
+					ScaleType = Enum.ScaleType.Slice,
+					SliceCenter = Rect.new(2, 2, 298, 298)
+				}, {
+					utility:Create("TextLabel", {
+						BackgroundTransparency = 1,
+						Position = UDim2.new(0, 10, 0, 0),
+						Size = UDim2.new(1, -10, 1, 0),
+						ZIndex = 3,
+						Font = Enum.Font.Gotham,
+						Text = value,
+						TextColor3 = themes.TextColor,
+						TextSize = 12,
+						TextXAlignment = "Left",
+						TextTransparency = 0.10000000149012
+					})
 				})
-			})
-
+			end
+		else
+			for i, value in pairs(dropdown.List.Frame:GetChildren()) do
+				if value:IsA("ImageButton") then
+					button = value
+				end
+			end
+		end
+		
 			button.MouseButton1Click:Connect(function()
 				options.callback(value)
-				button.ImageColor3 = Color3.fromRGB(0,255,0)
+				button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
 				self:updateDropdown(module, {update = value and {} or false})
 			end)
 
