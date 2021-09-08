@@ -1,4 +1,4 @@
-print("weirdo")
+print("bruh")
 
 -- init
 local player = game.Players.LocalPlayer
@@ -823,8 +823,7 @@ do
 		end
 
 		toggle.MouseButton1Click:Connect(function()
-			this.title = this.title
-			this.toggled = not this.toggled
+			module.Options.toggled = not this.toggled
 			self:updateToggle(module)
 
 			this.callback(this.toggled)
