@@ -1,4 +1,4 @@
-print("bruh")
+print("okokokk")
 
 -- init
 local player = game.Players.LocalPlayer
