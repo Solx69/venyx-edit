@@ -823,7 +823,7 @@ do
 		end
 
 		toggle.MouseButton1Click:Connect(function()
-			module.Options.toggled = not this.toggled
+			module.Options.toggled = not module.Options.toggled
 			self:updateToggle(module)
 
 			this.callback(this.toggled)
