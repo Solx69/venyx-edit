@@ -1,4 +1,4 @@
-print("k")
+print("ur mom")
 
 -- init
 local player = game.Players.LocalPlayer
@@ -2389,7 +2389,9 @@ do
 		end
 
 		for i,v in pairs(dropdown.List.Frame:GetChildren()) do
-			v:Destroy()
+			if v:IsA("ImageButton") then
+				v:Destroy()
+			end
 		end
 
 		local entries = 0
