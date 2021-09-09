@@ -1,4 +1,4 @@
-print("ily<3")
+print("ur mom")
 
 -- init
 local player = game.Players.LocalPlayer
@@ -1765,6 +1765,7 @@ do
 		this.title = data.title or "nil text"
 		this.list = data.list or {}
 		this.defaults = data.defaults
+		this.clear = data.clear or false
 		this.callback = data.callback or function() end
 
 		local checklist = utility:Create("Frame", {
@@ -2382,13 +2383,13 @@ do
 		local dropdown = module.Instance
 		local options = module.Options
 		local defaults = options.defaults or {}
-		aOptions = aOptions or {}
 		local clear = options.clear or false
+		aOptions = aOptions or {}
 
 		if (options.title) then
 			dropdown.Search.TextBox.Text = options.title
 		end
-
+		
 		if clear then
 			for i,v in pairs(dropdown.List.Frame:GetChildren()) do
 				if v:IsA("ImageButton") then
