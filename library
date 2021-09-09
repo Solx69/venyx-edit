@@ -1,4 +1,4 @@
-print("ur mom")
+print("bruh")
 
 -- init
 local player = game.Players.LocalPlayer
@@ -2400,16 +2400,12 @@ do
 
 		for i, button in pairs(dropdown.List.Frame:GetChildren()) do
 			if button:IsA("ImageButton") then
-				if button.Visible == false then
-					button.Visible = true
-				else
-					button.Visible = false
-				end
+				button:Destroy()
 			end
 		end
 
 		local list = aOptions.update or options.list
-		
+
 		for i, value in pairs(list) do
 			local button
 			if not dropdown.List.Frame:FindFirstChild(value) then
@@ -2444,16 +2440,6 @@ do
 						})
 					})
 					options.callback(value,true)
-					button.MouseButton1Click:Connect(function()
-						if button.Bool.Value == false then
-							button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
-							button.Bool.Value = true
-						else
-							button.TextLabel.TextColor3 = themes.TextColor
-							button.Bool.Value = false
-						end
-						options.callback(value, button.Bool.Value)
-					end)
 				else
 					button = utility:Create("ImageButton", {
 						Name = value,
@@ -2485,18 +2471,19 @@ do
 							Value = false
 						})
 					})
-					button.MouseButton1Click:Connect(function()
-						if button.Bool.Value == false then
-							button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
-							button.Bool.Value = true
-						else
-							button.TextLabel.TextColor3 = themes.TextColor
-							button.Bool.Value = false
-						end
-						options.callback(value, button.Bool.Value)
-					end)
 				end
 			end
+
+			button.MouseButton1Click:Connect(function()
+				if button.Bool.Value == false then
+					button.TextLabel.TextColor3 = Color3.fromRGB(0,255,0)
+					button.Bool.Value = true
+				else
+					button.TextLabel.TextColor3 = themes.TextColor
+					button.Bool.Value = false
+				end
+				options.callback(value, button.Bool.Value)
+			end)
 
 			entries = entries + 1
 		end
