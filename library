@@ -1,4 +1,4 @@
-print("okokokk")
+print("ily<3")
 
 -- init
 local player = game.Players.LocalPlayer
@@ -2261,7 +2261,7 @@ do
 		local frame = toggle.Button.Frame
 		local selectedPosition = options.toggled
 
-		toggle.Title.Text = module.Options.title
+		toggle.Title.Text = options.title
 
 		utility:Tween(frame, {
 			Size = UDim2.new(1, -22, 1, -9),
@@ -2383,9 +2383,18 @@ do
 		local options = module.Options
 		local defaults = options.defaults or {}
 		aOptions = aOptions or {}
+		local clear = options.clear or false
 
 		if (options.title) then
 			dropdown.Search.TextBox.Text = options.title
+		end
+
+		if clear then
+			for i,v in pairs(dropdown.List.Frame:GetChildren()) do
+				if v:IsA("ImageButton") then
+					v:Destroy()
+				end
+			end
 		end
 
 		local entries = 0
